@@ -1,5 +1,8 @@
-function preload(){
+Nose_X = 0;
+Nose_Y = 0;
 
+function preload(){
+mustache = loadImage("https://i.postimg.cc/JhrLNQbv/mustache.png");
 }
 
 function setup(){
@@ -15,6 +18,7 @@ poseNet.on('pose', GotPoses);
 
 function draw(){
   image(video,0,0,300,300);
+  image(mustache, Nose_X, Nose_Y, 45, 45)
 }
 
 function take_snapshot(){
@@ -29,8 +33,11 @@ function modelLoaded(){
     
       if( results.length > 0){
         console.log(results);
-        console.log(results[0].pose.nose.x);
-        console.log(results[0].pose.nose.y);
+        Nose_X = results[0].pose.nose.x - 22;
+        Nose_Y = results[0].pose.nose.y - 15;
+        console.log("The X Position of Nose = "+ Nose_X );
+        console.log("The Y Position of Nose = "+ Nose_Y );
       }
         
     }
+
